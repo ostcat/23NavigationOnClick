@@ -7,9 +7,11 @@ public class AgentCharacter : MonoBehaviour
 
     private AgentMover _mover;
     private DirectionalRotator _rotator;
+    private Health _health;
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
+    [SerializeField] private int _maxHealth = 100;
 
     public Vector3 CurrentVelocity => _mover.CurrentVelocity;
     public Quaternion CurrentRotation => _rotator.CurrentRotation;
@@ -21,6 +23,7 @@ public class AgentCharacter : MonoBehaviour
 
         _mover = new AgentMover(_agent, _moveSpeed);
         _rotator = new DirectionalRotator(transform, _rotationSpeed);
+        _health = new Health(_maxHealth);
     }
 
     private void Update()
@@ -33,6 +36,8 @@ public class AgentCharacter : MonoBehaviour
     public void StopMove() => _mover.Stop();
 
     public void ResumeMove() => _mover.Resume();
+
+    public void TakeDamage(int damage) => _health.TakeDamage(damage);
 
     public void SetRotationDirection(Vector3 inputDirection) => _rotator.SetInputDirection(inputDirection);
 
