@@ -7,6 +7,8 @@ public class AgentCharacterDirectionalMovableController : Controller
     private AgentCharacter _character;
     private float _minDistanceToTarget;
     private float _distanceToTarget;
+    private Vector3 _destination;
+
     private NavMeshPath _pathToTarget = new NavMeshPath();
 
     public AgentCharacterDirectionalMovableController(
@@ -19,24 +21,22 @@ public class AgentCharacterDirectionalMovableController : Controller
 
     public bool IsTargetReached() => _distanceToTarget <= _minDistanceToTarget;
 
-    protected override void UpdateLogic(float deltaTime, Vector3 direction)
+    public void SetDestination(Vector3 destination) => _destination = destination; 
+
+    protected override void UpdateLogic(float deltaTime)
     {
         Debug.Log(_character.CurrentVelocity);
         _character.SetRotationDirection(_character.CurrentVelocity); // Не устанавливается?
 
-        if (_character.TryGetPath(direction, _pathToTarget))
+        if (_character.TryGetPath(_destination, _pathToTarget))
         {
             _distanceToTarget = NavMeshUtils.GetPathLength(_pathToTarget);
 
-            //if (IsTargetReached(distanceToTarget))
-            //    _character.StopMove();
-
             _character.ResumeMove();
-            _character.SetDestination(direction);
+            _character.SetDestination(_destination);
             return;
         }
 
         _character.StopMove();
     }
-
 }

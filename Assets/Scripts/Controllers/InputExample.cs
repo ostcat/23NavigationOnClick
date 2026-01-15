@@ -35,10 +35,11 @@ public class InputExample : MonoBehaviour
         {
             Vector3 characterDestination = _mouseConverter.CalculateScreenPointToTarget(_ground);
             _targetPointer.CreatePoint(_targetPointPrefab, characterDestination);
-
-            if (characterDestination != Vector3.zero)
-                _characterController.Update(Time.deltaTime, characterDestination);
+            _characterController.SetDestination(characterDestination);
+                
         }
+
+        _characterController.Update(Time.deltaTime);
     }
 
     private void OnDrawGizmosSelected()

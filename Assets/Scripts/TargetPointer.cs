@@ -13,6 +13,11 @@ public class TargetPointer
 
     public void DestroyPoint()
     {
-        Object.Destroy(_point);
+        if (_point != null)
+        {
+            Debug.Log("PointIsDestroying");
+            Object.Destroy(_point.gameObject);
+            _point = null;
+        }
     }
 }
