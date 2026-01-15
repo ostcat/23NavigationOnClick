@@ -6,14 +6,9 @@ public class TargetPointer
 {
     private TargetPoint _point;
 
-    public void CreatePoint(TargetPoint pointPrefab, Vector3 origin, Vector3 direction, LayerMask layerMask)
+    public void CreatePoint(TargetPoint pointPrefab, Vector3 point)
     {
-        Ray ray = new Ray(origin, direction);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask.value))
-        {
-            _point = Object.Instantiate(pointPrefab, hit.point, Quaternion.identity);
-        }
+        _point = Object.Instantiate(pointPrefab, point, Quaternion.identity);
     }
 
     public void DestroyPoint()

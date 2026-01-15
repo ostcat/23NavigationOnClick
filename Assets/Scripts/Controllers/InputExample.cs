@@ -33,12 +33,11 @@ public class InputExample : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            _targetPointer.CreatePoint(_targetPointPrefab, _mouseConverter.Ray.origin, _mouseConverter.Ray.direction, _groundMask);
+            Vector3 characterDestination = _mouseConverter.CalculateScreenPointToTarget(_ground);
+            _targetPointer.CreatePoint(_targetPointPrefab, characterDestination);
 
-            Vector3 characterDirection = _mouseConverter.CalculateScreenPointToTarget(_ground);
-
-            if (characterDirection != Vector3.zero)
-                _characterController.Update(Time.deltaTime, characterDirection);
+            if (characterDestination != Vector3.zero)
+                _characterController.Update(Time.deltaTime, characterDestination);
         }
     }
 
