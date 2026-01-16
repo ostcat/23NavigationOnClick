@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputExample : MonoBehaviour
@@ -13,7 +11,6 @@ public class InputExample : MonoBehaviour
     private MouseToWorldPositionConverter _mouseConverter;
     private TargetPointer _targetPointer;
 
-
     private void Awake()
     {
         _mouseConverter = new MouseToWorldPositionConverter();
@@ -25,11 +22,17 @@ public class InputExample : MonoBehaviour
 
     private void Update()
     {
-        if(_characterController.IsTargetReached()==true)
+        if (_characterController.IsTargetReached() == true)
         {
-            Debug.Log("TargetIsReached");
             _targetPointer.DestroyPoint();
         }
+
+        if (_character.IsDead())
+        {
+            _targetPointer.DestroyPoint();
+            _characterController.Disable();
+            return;
+        }    
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -40,12 +43,5 @@ public class InputExample : MonoBehaviour
         }
 
         _characterController.Update(Time.deltaTime);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(new Vector3(mouseWorldPosition.x, 1f, mouseWorldPosition.y), 0.3f);
     }
 }

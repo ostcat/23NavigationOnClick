@@ -22,6 +22,5 @@ public class DirectionalMover
         CurrentVelocity = _currentDirection.normalized * _movementSpeed;
 
         _characterController.Move(CurrentVelocity * deltaTime);
-
     }
 }

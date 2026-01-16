@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 public class AgentCharacterDirectionalMovableController : Controller
 {
@@ -25,8 +24,7 @@ public class AgentCharacterDirectionalMovableController : Controller
 
     protected override void UpdateLogic(float deltaTime)
     {
-        Debug.Log(_character.CurrentVelocity);
-        _character.SetRotationDirection(_character.CurrentVelocity); // Не устанавливается?
+        _character.SetRotationDirection(_character.CurrentVelocity);
 
         if (_character.TryGetPath(_destination, _pathToTarget))
         {

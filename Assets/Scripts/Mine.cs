@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mine : MonoBehaviour
@@ -13,6 +11,12 @@ public class Mine : MonoBehaviour
     {
         if(IsInExplosionArea())
             Explode();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _radius);
     }
 
     public void Explode()

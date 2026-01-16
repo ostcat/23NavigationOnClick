@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetPointer
@@ -15,7 +13,6 @@ public class TargetPointer
     {
         if (_point != null)
         {
-            Debug.Log("PointIsDestroying");
             Object.Destroy(_point.gameObject);
             _point = null;
         }

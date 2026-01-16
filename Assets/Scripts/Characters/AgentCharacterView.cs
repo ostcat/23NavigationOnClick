@@ -1,9 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AgentCharacterView : MonoBehaviour
 {
+    private const int BaseLayerIndex = 0;
+    private const int InjuredLayerIndex = 1;
+    private const float TurnOnLayerWeight = 1.0f;
+    private const float TurnOffLayerWeight = 0f;
+    private const float MinVelocityToMove = 0.05f;
+
     private readonly int IsRunningKey = Animator.StringToHash("IsRunning");
 
     [SerializeField] private Animator _animator;
@@ -11,7 +15,18 @@ public class AgentCharacterView : MonoBehaviour
 
     private void Update()
     {
-        if (_character.CurrentVelocity.magnitude > 0.05f)
+        if(_character.IsInjured())
+        {
+            _animator.SetLayerWeight(BaseLayerIndex, TurnOffLayerWeight);
+            _animator.SetLayerWeight(InjuredLayerIndex, TurnOnLayerWeight);
+        }
+        else
+        {
+            _animator.SetLayerWeight(BaseLayerIndex, TurnOnLayerWeight);
+            _animator.SetLayerWeight(InjuredLayerIndex, TurnOffLayerWeight);
+        }
+
+        if (_character.CurrentVelocity.magnitude >= MinVelocityToMove)
             StartRunning();
         else
             StopRunning();
