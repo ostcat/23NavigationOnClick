@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Health
 {
-    private const string TakeDamageTriggerKey = "TakeDamage";
-
     private float _maxHealth;
     private float _currentHealth;
     private float _percentageToDetermineIfInjured = 0.3f;
@@ -36,7 +34,6 @@ public class Health
             return;
         }
 
-        _animator.SetTrigger(TakeDamageTriggerKey);
         Debug.Log("Current health: " + _currentHealth);
     }
 

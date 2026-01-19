@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class AgentCharacter : MonoBehaviour, IDamageable
 {
+    private const string TakeDamageTriggerKey = "TakeDamage";
     private NavMeshAgent _agent;
 
     private AgentMover _mover;
@@ -38,7 +39,11 @@ public class AgentCharacter : MonoBehaviour, IDamageable
 
     public void ResumeMove() => _mover.Resume();
 
-    public void TakeDamage(float damage) => _health.TakeDamage(damage);
+    public void TakeDamage(float damage)
+    {
+        _health.TakeDamage(damage);
+        _animator.SetTrigger(TakeDamageTriggerKey);
+    }
 
     public bool IsInjured() => _health.IsInjured();
 
