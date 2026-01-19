@@ -3,7 +3,6 @@ using UnityEngine;
 public class Health
 {
     private const string TakeDamageTriggerKey = "TakeDamage";
-    private const string IsDeadKey = "IsDead";
 
     private float _maxHealth;
     private float _currentHealth;
@@ -19,7 +18,7 @@ public class Health
         _animator = animator;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if(damage < 0)
         {
@@ -32,7 +31,7 @@ public class Health
         if (_currentHealth < 0)
         {
             _currentHealth = 0;
-            _animator.SetBool(IsDeadKey, true);
+
             Debug.Log("You died");
             return;
         }

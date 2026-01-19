@@ -10,6 +10,8 @@ public class AgentCharacterDirectionalMovableController : Controller
 
     private NavMeshPath _pathToTarget = new NavMeshPath();
 
+    public Vector3 Destination => _destination;
+
     public AgentCharacterDirectionalMovableController(
         AgentCharacter character,
         float minDistanceToTarget)

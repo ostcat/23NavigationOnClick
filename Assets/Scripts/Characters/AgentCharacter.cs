@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AgentCharacter : MonoBehaviour
+public class AgentCharacter : MonoBehaviour, IDamageable
 {
     private NavMeshAgent _agent;
 
@@ -38,7 +38,7 @@ public class AgentCharacter : MonoBehaviour
 
     public void ResumeMove() => _mover.Resume();
 
-    public void TakeDamage(int damage) => _health.TakeDamage(damage);
+    public void TakeDamage(float damage) => _health.TakeDamage(damage);
 
     public bool IsInjured() => _health.IsInjured();
 

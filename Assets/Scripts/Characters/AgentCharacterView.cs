@@ -9,13 +9,19 @@ public class AgentCharacterView : MonoBehaviour
     private const float MinVelocityToMove = 0.05f;
 
     private readonly int IsRunningKey = Animator.StringToHash("IsRunning");
+    private readonly int IsDeadKey = Animator.StringToHash("IsDead");
 
     [SerializeField] private Animator _animator;
     [SerializeField] private AgentCharacter _character;
 
     private void Update()
     {
-        if(_character.IsInjured())
+        if (_character.IsDead())
+        {
+            _animator.SetBool(IsDeadKey, true);
+        }
+
+        if (_character.IsInjured())
         {
             _animator.SetLayerWeight(BaseLayerIndex, TurnOffLayerWeight);
             _animator.SetLayerWeight(InjuredLayerIndex, TurnOnLayerWeight);

@@ -14,10 +14,11 @@ public class InputExample : MonoBehaviour
     private void Awake()
     {
         _mouseConverter = new MouseToWorldPositionConverter();
-        _targetPointer = new TargetPointer();
 
         _characterController = new AgentCharacterDirectionalMovableController(_character, 2);
         _characterController.Enable();
+
+        _targetPointer = new TargetPointer(_characterController);
     }
 
     private void Update()
@@ -37,9 +38,9 @@ public class InputExample : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 characterDestination = _mouseConverter.CalculateScreenPointToTarget(_ground);
-            _targetPointer.CreatePoint(_targetPointPrefab, characterDestination);
+
             _characterController.SetDestination(characterDestination);
-                
+            _targetPointer.CreatePoint(_targetPointPrefab);   
         }
 
         _characterController.Update(Time.deltaTime);
