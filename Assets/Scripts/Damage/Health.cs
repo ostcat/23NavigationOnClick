@@ -37,6 +37,24 @@ public class Health
         Debug.Log("Current health: " + _currentHealth);
     }
 
+    public void AddHealth(float healthToRestore)
+    {
+        if (healthToRestore < 0)
+        {
+            Debug.LogError("healthToRestore < 0");
+            return;
+        }
+
+        _currentHealth += healthToRestore;
+
+        if (_currentHealth > _maxHealth)
+        {
+            _currentHealth = _maxHealth;
+        }
+
+        Debug.Log("Current health: " + _currentHealth);
+    }
+
     public bool IsInjured() => _currentHealth <= (_maxHealth * _percentageToDetermineIfInjured);
 
     public bool IsDead() => _currentHealth == 0;

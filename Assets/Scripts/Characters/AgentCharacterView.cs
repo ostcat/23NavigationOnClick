@@ -10,6 +10,7 @@ public class AgentCharacterView : MonoBehaviour
 
     private readonly int IsRunningKey = Animator.StringToHash("IsRunning");
     private readonly int IsDeadKey = Animator.StringToHash("IsDead");
+    private readonly int InJumpProcessKey = Animator.StringToHash("InJumpProcess");
 
     [SerializeField] private Animator _animator;
     [SerializeField] private AgentCharacter _character;
@@ -20,6 +21,8 @@ public class AgentCharacterView : MonoBehaviour
         {
             _animator.SetBool(IsDeadKey, true);
         }
+
+        _animator.SetBool(InJumpProcessKey, _character.InJumpProcess);
 
         if (_character.IsInjured())
         {

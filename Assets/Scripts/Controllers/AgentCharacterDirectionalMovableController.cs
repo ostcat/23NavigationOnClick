@@ -26,6 +26,19 @@ public class AgentCharacterDirectionalMovableController : Controller
 
     protected override void UpdateLogic(float deltaTime)
     {
+        if (_character.IsOnNavMeshLink(out OffMeshLinkData offMeshLinkData))
+        {
+            Debug.Log("CharacterIsOnNavMeshLink");
+
+            if (_character.InJumpProcess == false)
+            {
+                _character.SetRotationDirection(offMeshLinkData.endPos - offMeshLinkData.startPos);
+                _character.Jump(offMeshLinkData);
+            }
+
+            return;
+        }
+
         _character.SetRotationDirection(_character.CurrentVelocity);
 
         if (_character.TryGetPath(_destination, _pathToTarget))

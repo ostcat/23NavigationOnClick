@@ -1,37 +1,36 @@
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Mine : MonoBehaviour
 {
     [SerializeField] private float _radius;
     [SerializeField] private float _damage;
 
-    private float _timer;
+    private Timer _timer;
     private float _timerDuration = 2f;
-    private bool _isCountingDown;
+    private bool _isActivated;
 
     public bool IsExploding { get; private set; }
 
     private void Awake()
     {
-        _timer = _timerDuration;
+        _timer = new Timer(this);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<IDamageable>() != null)
+        if (_isActivated == false && other.GetComponent<IDamageable>() != null) 
         {
-            _isCountingDown = true;
+            _isActivated = true;
+            _timer.StartProcess(_timerDuration);
         }
     }
 
     private void Update()
     {
-        if(_isCountingDown == true)
+        if (_isActivated && _timer.InProcess(out float elapsedTime) == false)
         {
-            _timer -= Time.deltaTime;
-
-            if (_timer <= 0)
-                Explode();
+            Explode();
         }
     }
 
