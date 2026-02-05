@@ -8,6 +8,7 @@ public class AidKitSpawner
 
     private FirstAidKit _aidKitPrefab;
     private Transform _target;
+
     private float _radius;
     private float _timeForSpawn;
 
@@ -66,6 +67,6 @@ public class AidKitSpawner
         Vector3 direction = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0, Mathf.Cos(angle * Mathf.Deg2Rad));
         Vector3 spawnPosition = _target.position + direction * _radius;
 
-        Object.Instantiate(_aidKitPrefab, spawnPosition, Quaternion.identity);
+        FirstAidKit firstAid = Object.Instantiate(_aidKitPrefab, spawnPosition, Quaternion.identity);
     }
 }

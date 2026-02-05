@@ -13,7 +13,6 @@ public class InputExample : MonoBehaviour
     private AgentCharacterDirectionalMovableController _characterController;
     private MouseToWorldPositionConverter _mouseConverter;
     private TargetPointer _targetPointer;
-    private Timer _aidTimer;
     private AidKitSpawner _aidSpawner;
 
     private void Awake()
@@ -24,7 +23,6 @@ public class InputExample : MonoBehaviour
         _characterController.Enable();
 
         _targetPointer = new TargetPointer(_characterController);
-        _aidTimer = new Timer(this);
         _aidSpawner = new AidKitSpawner(this, _aidKitPrefab, _character.transform, _radiusForAidKitSpawn, _timeForAidKitToSpawn);
     }
 
