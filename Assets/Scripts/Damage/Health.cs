@@ -5,15 +5,13 @@ public class Health
     private float _maxHealth;
     private float _currentHealth;
     private float _percentageToDetermineIfInjured = 0.3f;
-    private Animator _animator;
     
     public float CurrentHealth => _currentHealth;
 
-    public Health(float maxHealth, Animator animator)
+    public Health(float maxHealth)
     {
         _maxHealth = maxHealth;
         _currentHealth = maxHealth;
-        _animator = animator;
     }
 
     public void TakeDamage(float damage)

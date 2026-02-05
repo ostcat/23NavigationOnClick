@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AidKitSpawner
 {
@@ -10,6 +11,7 @@ public class AidKitSpawner
     private Transform _target;
 
     private float _radius;
+    private float _maxDistanceFromRadius = 1f;
     private float _timeForSpawn;
 
     public AidKitSpawner(MonoBehaviour coroutineRunner, FirstAidKit aidKitPrebab, Transform target, float radius, float timeForSpawn)
@@ -65,8 +67,13 @@ public class AidKitSpawner
     {
         float angle = Random.Range(0f, 360f);
         Vector3 direction = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0, Mathf.Cos(angle * Mathf.Deg2Rad));
-        Vector3 spawnPosition = _target.position + direction * _radius;
+        Vector3 randomPosition = _target.position + direction * _radius;
 
-        FirstAidKit firstAid = Object.Instantiate(_aidKitPrefab, spawnPosition, Quaternion.identity);
+        int walkableMask = 1;
+
+        if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, _maxDistanceFromRadius, walkableMask))
+        {
+            Object.Instantiate(_aidKitPrefab, hit.position, Quaternion.identity);
+        }
     }
 }

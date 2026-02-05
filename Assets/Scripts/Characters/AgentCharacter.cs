@@ -29,7 +29,7 @@ public class AgentCharacter : MonoBehaviour, IDamageable, ICureable
 
         _mover = new AgentMover(_agent, _moveSpeed);
         _rotator = new DirectionalRotator(transform, _rotationSpeed);
-        _health = new Health(_maxHealth, _animator);
+        _health = new Health(_maxHealth);
         _jumper = new AgentJumper(_jumpSpeed, _agent, this, _jumpCurve);
     }
 

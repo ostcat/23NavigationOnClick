@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputExample : MonoBehaviour
 {
@@ -42,10 +43,13 @@ public class InputExample : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 characterDestination = _mouseConverter.CalculateScreenPointToTarget(_ground);
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                Vector3 characterDestination = _mouseConverter.CalculateScreenPointToTarget(_ground);
 
-            _characterController.SetDestination(characterDestination);
-            _targetPointer.CreatePoint(_targetPointPrefab);   
+                _characterController.SetDestination(characterDestination);
+                _targetPointer.CreatePoint(_targetPointPrefab);
+            }   
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -53,5 +57,4 @@ public class InputExample : MonoBehaviour
 
         _characterController.Update(Time.deltaTime);
     }
-
 }
